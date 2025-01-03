@@ -43,14 +43,20 @@ void find1(Homemember *head)
 {
     auto *move=head->next;
     int temp=0;
-    std::string Date;
+    std::string begin,end;
 
-    std::cout<<"请输入消费日期（例：20240409）："<<std::endl;
-    std::cin>>Date;
+    do{
+        std::cout<<"请输入起始时间：(例如：20240409)"<<std::endl;
+        std::cin>>begin;
+        std::cout<<"请输入终止时间：(例如：20240409)"<<std::endl;
+        std::cin>>end;   
+
+        if(begin.size()!=8||end.size()!=8) std::cout<<"日期格式错误，请输入正确格式的日期"<<std::endl;
+    }while(begin.size()!=8||end.size()!=8);
 
     while(move!=nullptr)
     {
-        if(Date==move->Date)
+        if(move->Date>=begin&&move->Date<=end)
         {
             //打印消费记录
             printmsgs(move);
@@ -104,16 +110,23 @@ void find3(Homemember *head)
     auto *move=head->next;
     std::string ID;
     int temp=0;
-    std::string Date;
+    std::string begin,end;
 
-    std::cout<<"请输入消费日期（例：20240409）："<<std::endl;
-    std::cin>>Date;
+    do{
+        std::cout<<"请输入起始时间：(例如：20240409)"<<std::endl;
+        std::cin>>begin;
+        std::cout<<"请输入终止时间：(例如：20240409)"<<std::endl;
+        std::cin>>end;   
+
+        if(begin.size()!=8||end.size()!=8) std::cout<<"日期格式错误，请输入正确格式的日期"<<std::endl;
+    }while(begin.size()!=8||end.size()!=8);
+
     std::cout<<"请输入成员信息："<<std::endl;
     std::cin>>ID;
 
     while(move!=nullptr)
     {
-        if(Date==move->Date)
+        if(ID==move->ID&&move->Date>=begin&&move->Date<=end)
         {
             //打印消费记录
             printmsgs(move);
@@ -136,16 +149,23 @@ void find4(Homemember *head)
     auto *move=head->next;
     std::string type;
     int temp=0;
-    std::string Date;
+    std::string begin,end;
 
-    std::cout<<"请输入消费日期（例：20240409）："<<std::endl;
-    std::cin>>Date;
+    do{
+        std::cout<<"请输入起始时间：(例如：20240409)"<<std::endl;
+        std::cin>>begin;
+        std::cout<<"请输入终止时间：(例如：20240409)"<<std::endl;
+        std::cin>>end;   
+
+        if(begin.size()!=8||end.size()!=8) std::cout<<"日期格式错误，请输入正确格式的日期"<<std::endl;
+    }while(begin.size()!=8||end.size()!=8);
+    
     std::cout<<"请输入消费品类："<<std::endl;
     std::cin>>type;
 
     while(move!=nullptr)
     {
-        if(Date==move->Date)
+        if(type==move->type&&move->Date>=begin&&move->Date<=end)
         {
             //打印消费记录
             printmsgs(move);

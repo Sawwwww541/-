@@ -2,24 +2,60 @@
 #include "D:\\Finalworks\\include\\HomeFeeMsg.hpp"
 #include "D:\\Finalworks\\include\\printmsg.hpp"
 
-//录入函数群(录入并保存到文件)
 void add(Homemember *head)
 {
-    //移动指针，利用尾插法增添链表节点
-    auto *temp=new Homemember;
-    auto *move=head;
+    int cnt=0;
+    double amount;
+    std::string Date,ID,type,method,site,detail;
+    //输入信息
+    std::cout<<"----------------------------------"<<std::endl;
+    std::cout<<"请输入日期（格式：20240409）："<<std::endl;
+    std::cin>>Date;
 
-    while(move->next!=nullptr) 
+    std::cout<<"请输入成员身份："<<std::endl;
+    std::cin>>ID;
+
+    std::cout<<"请输入消费金额："<<std::endl;
+    std::cin>>amount;
+
+    std::cout<<"请输入消费品类："<<std::endl;
+    std::cin>>type;
+
+    std::cout<<"请输入支出方式："<<std::endl;
+    std::cin>>method;
+
+    std::cout<<"请输入消费场所："<<std::endl;
+    std::cin>>site;
+
+    std::cout<<"请输入商品详情："<<std::endl;
+    std::cin>>detail;    
+    //查重
+    auto *move=head;
+    auto *slow=head;
+    while(move!=nullptr) 
     {
+        if(Date==move->Date&&ID==move->ID
+        &&amount==move->amount&&type==move->type
+        &&method==move->method&&site==move->site&&detail==move->detail)
+            cnt++;
+        slow=move;
         move=move->next;
     }
-
-    temp->entermsgs(temp);
-    move->next=temp;
-                
+    if(cnt==0){
+        auto *temp=new Homemember;
+        temp->Date=Date;
+        temp->ID=ID;
+        temp->amount=amount;
+        temp->type=type;
+        temp->method=method;
+        temp->site=site;
+        temp->detail=detail;
+        slow->next=temp;
+        std::cout<<"添加成功"<<std::endl;        
+    }else std::cout<<"您已添加过该条目，添加失败"<<std::endl;
+    std::cout<<"----------------------------------"<<std::endl;        
 }
-//排序函数群(按交易日期升序)
-//采用归并排序
+
 Homemember* rank(Homemember *head) 
 {
     if(head==nullptr||head->next==nullptr) return head;
@@ -33,7 +69,7 @@ Homemember* rank(Homemember *head)
     return merge(head1,head2);
 
 }
-//查找链表中点
+
 Homemember* midsearch(Homemember *head)
 {
     Homemember *slow=head,*fast=head->next;
@@ -45,11 +81,11 @@ Homemember* midsearch(Homemember *head)
     }
 
     Homemember *mid=slow->next;
-    slow->next=nullptr;         //切断中点与另一半的链接
+    slow->next=nullptr;         
 
     return mid;
 }
-//合并，顺便完成排序
+
 Homemember* merge(Homemember *head1,Homemember *head2)
 {
     Homemember *temp=new Homemember(),*p=temp;
@@ -80,33 +116,41 @@ Homemember* merge(Homemember *head1,Homemember *head2)
 
 }
 
-//更新函数群(修改并保存到文件,或者删除某一结点)
 void change(Homemember *head,int& judgement) 
 {
-    std::string ID,type;
+    std::string ID,type,Date,method,site,detail;
     double amount;
-    std::string Date;
     auto *target=head->next,*slow=head;
     char yesorno='n';
 
-    //更详细的搜索模块，防止修改到一个以上的条目
+    std::cout<<"----------------------------------"<<std::endl;
+    std::cout<<"请输入日期（格式：20240409）："<<std::endl;
+    std::cin>>Date;
 
-    std::cout<<"请输入相关信息，以便定位您要修改的条目"<<std::endl;
-    std::cout<<"请输入消费日期（例：20240409）："<<std::endl;
-    std::cin>>Date;    
-    std::cout<<"成员身份："<<std::endl;
+    std::cout<<"请输入成员身份："<<std::endl;
     std::cin>>ID;
-    std::cout<<"消费金额："<<std::endl;
+
+    std::cout<<"请输入消费金额："<<std::endl;
     std::cin>>amount;
-    std::cout<<"消费品类："<<std::endl;
+
+    std::cout<<"请输入消费品类："<<std::endl;
     std::cin>>type;
+
+    std::cout<<"请输入支出方式："<<std::endl;
+    std::cin>>method;
+
+    std::cout<<"请输入消费场所："<<std::endl;
+    std::cin>>site;
+
+    std::cout<<"请输入商品详情："<<std::endl;
+    std::cin>>detail;
 
     while(target!=nullptr)
     {
         if(Date==target->Date&&ID==target->ID
-        &&amount==target->amount&&type==target->type)
+        &&amount==target->amount&&type==target->type
+        &&method==target->method&&site==target->site&&detail==target->detail)
         {
-            //打印消费记录
             printmsgs(target);
             break;
         }
@@ -115,8 +159,7 @@ void change(Homemember *head,int& judgement)
     }
     if(target==nullptr)
     {
-        //输出错误
-        std::cout<<"未找到相关消费记录，即将返回"<<std::endl;
+        std::cout<<"未查找到相关信息"<<std::endl;
         system("pause");
         system("cls");
         return;
@@ -124,13 +167,13 @@ void change(Homemember *head,int& judgement)
 
     if(judgement==0)
     {
-        std::cout<<"请输入更改后的数据"<<std::endl;
+        std::cout<<"请输入更改后的信息"<<std::endl;
         target->entermsgs(target);
-        std::cout<<"修改成功"<<std::endl;
+        std::cout<<"更改成功"<<std::endl;
     }
     else
     {
-        std::cout<<"确认删除？[y/n]"<<std::endl;
+        std::cout<<"确认删除[y/n]"<<std::endl;
         std::cin>>yesorno;
         if(yesorno=='y')
         {
@@ -139,7 +182,7 @@ void change(Homemember *head,int& judgement)
             target=nullptr;
         }else
         {
-            std::cout<<"取消删除，即将返回"<<std::endl;
+            std::cout<<"取消删除"<<std::endl;
             system("pause");
             system("cls");
             return;

@@ -16,6 +16,8 @@ void ifile(Homemember *head)                //内存到文件
             <<"###"<<std::endl;              //＃号作为大分隔符，将模块区分开
             move=move->next;
         }
+    }else{
+        std::cout<<"打开文件失败！"<<std::endl;
     }
 
     file.close();
@@ -51,6 +53,8 @@ void ofile(Homemember *head)                //文件到内存
                 }
             }
         }
+    }else{
+        std::cout<<"文件打开失败！"<<std::endl;
     }
 
 }

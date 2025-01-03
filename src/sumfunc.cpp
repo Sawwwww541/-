@@ -43,20 +43,23 @@ double sum1(Homemember *head)
     std::string ID;
     double sumamount=0.0;
 
+    do{
+        std::cout<<"请输入起始时间：(例如：20240409)"<<std::endl;
+        std::cin>>begin;
+        std::cout<<"请输入终止时间：(例如：20240409)"<<std::endl;
+        std::cin>>end;   
+
+        if(begin.size()!=8||end.size()!=8) std::cout<<"日期格式错误，请输入正确格式的日期"<<std::endl;
+    }while(begin.size()!=8||end.size()!=8);
+
     std::cout<<"请输入家庭成员："<<std::endl;
     std::cin>>ID;
-    std::cout<<"请输入起始时间：(例如：20240409)"<<std::endl;
-    std::cin>>begin;
-    std::cout<<"请输入终止时间：(例如：20240409)"<<std::endl;
-    std::cin>>end;
 
     while(move!=nullptr)
     {
         if(move->ID==ID&&move->Date>=begin&&move->Date<=end)
-            {
-                printmsgs(move);
-                sumamount+=move->amount;
-            }
+            sumamount+=move->amount;    
+
         move=move->next;
     }
 
@@ -74,20 +77,23 @@ double sum2(Homemember *head)
     std::string type;
     double sumamount=0.0;
 
+    do{
+        std::cout<<"请输入起始时间：(例如：20240409)"<<std::endl;
+        std::cin>>begin;
+        std::cout<<"请输入终止时间：(例如：20240409)"<<std::endl;
+        std::cin>>end;   
+
+        if(begin.size()!=8||end.size()!=8) std::cout<<"日期格式错误，请输入正确格式的日期"<<std::endl;
+    }while(begin.size()!=8||end.size()!=8);
+
     std::cout<<"请输入消费品类："<<std::endl;
     std::cin>>type;
-    std::cout<<"请输入起始时间："<<std::endl;
-    std::cin>>begin;
-    std::cout<<"请输入终止时间："<<std::endl;
-    std::cin>>end;
 
     while(move!=nullptr)
     {
         if(move->type==type&&move->Date>=begin&&move->Date<=end)
-            {
-                printmsgs(move);
-                sumamount+=move->amount;
-            }
+            sumamount+=move->amount;
+
         move=move->next;
     }
 
@@ -104,18 +110,20 @@ double sum3(Homemember *head)
     std::string begin,end;
     double sumamount=0.0;
 
-    std::cout<<"请输入起始时间："<<std::endl;
-    std::cin>>begin;
-    std::cout<<"请输入终止时间："<<std::endl;
-    std::cin>>end;
+    do{
+        std::cout<<"请输入起始时间：(例如：20240409)"<<std::endl;
+        std::cin>>begin;
+        std::cout<<"请输入终止时间：(例如：20240409)"<<std::endl;
+        std::cin>>end;   
+
+        if(begin.size()!=8||end.size()!=8) std::cout<<"日期格式错误，请输入正确格式的日期"<<std::endl;
+    }while(begin.size()!=8||end.size()!=8);
 
     while(move!=nullptr)
     {
         if(move->Date>=begin&&move->Date<=end)
-            {
-                printmsgs(move);
-                sumamount+=move->amount;
-            } 
+            sumamount+=move->amount;
+            
         move=move->next;
     }
 

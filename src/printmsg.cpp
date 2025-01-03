@@ -1,7 +1,7 @@
 #include "D:\\Finalworks\\include\\HomeFeeMsg.hpp"
 #include "D:\\Finalworks\\include\\printmsg.hpp"
 
-//信息打印函数
+//打印单个节点
 void printmsgs(Homemember *target)
 {
     std::cout<<"-------------------------------------"<<std::endl;
@@ -15,20 +15,15 @@ void printmsgs(Homemember *target)
     std::cout<<"-------------------------------------"<<std::endl;
 }
 
-
-//用于排序后的打印函数，封装起来好看一点
-void printall(Homemember *head,char& isprint)
+//打印所有信息
+void printall(Homemember *head)
 {
-    std::cout<<"已按消费日期升序，是否打印信息？[y/n]"<<std::endl;
-    std::cin>>isprint;
-    if(isprint=='y')
+    Homemember *move=head->next;
+    while(move!=nullptr)
     {
-        Homemember *move=head->next;
-        while(move!=nullptr)
-        {
-            printmsgs(move);
-            move=move->next;
-        }
+        printmsgs(move);
+        move=move->next;
     }
+    
     return;
 }
